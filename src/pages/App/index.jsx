@@ -3,6 +3,7 @@ import { MyAccount } from "../MyAccount";
 import { MyOrder } from "../MyOrder";
 import { MyOrders } from "../MyOrders";
 import { Home } from "../Home";
+import { Layout } from "../../components/Navbar/Layout";
 import { Navbar } from "../../components/Navbar";
 import { NotFound } from "../NotFound";
 import { SingIn } from "../SingIn";
@@ -25,7 +26,9 @@ const App = () => {
 		<>
 			<BrowserRouter>
 				<Navbar />
-				<AppRoutes />
+				<Layout>
+					<AppRoutes />
+				</Layout>
 			</BrowserRouter>
 		</>
 	);
