@@ -5,6 +5,7 @@ export const ShoppingCartContext = createContext();
 export const ShoppingCartProvider = ({ children }) => {
 	const [count, setCount] = useState(0);
 	const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
+	const [displayedItem, setDisplayedItem] = useState({});
 	const openProductDetail = () => setIsProductDetailOpen(true);
 	const closeProductDetail = () => setIsProductDetailOpen(false);
 	const onAddCount = () => {
@@ -19,6 +20,8 @@ export const ShoppingCartProvider = ({ children }) => {
 				isProductDetailOpen,
 				openProductDetail,
 				closeProductDetail,
+				displayedItem,
+				setDisplayedItem,
 			}}
 		>
 			{children}

@@ -2,21 +2,32 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 
-const Card = ({ title, price, category: { name }, images }) => {
-	const { onAddCount, openProductDetail } = useContext(ShoppingCartContext);
+const Card = (item) => {
+	let {
+		title,
+		price,
+		category,
+		image,
+	} = { ...item };
+	const { onAddCount, openProductDetail, setDisplayedItem } =
+		useContext(ShoppingCartContext);
+	const showProduct = () => {
+		setDisplayedItem(item);
+		openProductDetail();
+	};
 
 	return (
 		<div
 			className="bg-white cursor-pointer w-56 h-60 rounded-lg"
-			onClick={openProductDetail}
+			onClick={showProduct}
 		>
 			<figure className="relative mb-2 w-full h-4/5">
 				<span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">
-					{name}
+					{category}
 				</span>
 				<img
 					className="w-full h-full object-cover rounded-lg"
-					src={images?.[0]}
+					src={image}
 					alt={title}
 				/>
 				<button
@@ -30,7 +41,7 @@ const Card = ({ title, price, category: { name }, images }) => {
 				</button>
 			</figure>
 			<p className="flex justify-between">
-				<span className="text-sm font-light">{title}</span>
+				<span className="text-sm font-light truncate">{title}</span>
 				<span className="text-md font-bold">{`$${price}`}</span>
 			</p>
 		</div>
