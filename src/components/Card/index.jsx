@@ -3,10 +3,13 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 
 const Card = ({ title, price, category: { name }, images }) => {
-	const { onAddCount } = useContext(ShoppingCartContext);
+	const { onAddCount, openProductDetail } = useContext(ShoppingCartContext);
 
 	return (
-		<div className="bg-white cursor-pointer w-56 h-60 rounded-lg">
+		<div
+			className="bg-white cursor-pointer w-56 h-60 rounded-lg"
+			onClick={openProductDetail}
+		>
 			<figure className="relative mb-2 w-full h-4/5">
 				<span className="absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5">
 					{name}
@@ -18,7 +21,10 @@ const Card = ({ title, price, category: { name }, images }) => {
 				/>
 				<button
 					className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
-					onClick={onAddCount}
+					onClick={(event) => {
+						event.stopPropagation();
+						onAddCount();
+					}}
 				>
 					<PlusIcon className="h-6 w-6 text-black" />
 				</button>
