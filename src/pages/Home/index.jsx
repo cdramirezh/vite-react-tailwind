@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
+import { ProductDetail } from "../../components/ProductDetail";
 import { URL } from "../../API";
 import "./home.css";
 
@@ -17,6 +18,7 @@ function Home() {
 
 	return (
 		<>
+		<ProductDetail />
 		Home
 			<div className="grid gap-4 place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full max-w-screen-lg">
 				{items.map((item) => (
