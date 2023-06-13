@@ -1,5 +1,0 @@
-.product-detail {
-	width: 360px;
-	/* 68px is the nav height */
-	height: calc(100vh - 68px);
-}
