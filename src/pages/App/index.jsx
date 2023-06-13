@@ -24,14 +24,14 @@ const AppRoutes = () => {
 
 const App = () => {
 	return (
-		<>
+		<ShoppingCartProvider>
 			<BrowserRouter>
 				<Navbar />
 				<Layout>
 					<AppRoutes />
 				</Layout>
 			</BrowserRouter>
-		</>
+		</ShoppingCartProvider>
 	);
 };
 
