@@ -1,12 +1,13 @@
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { CheckoutSideMenu } from "../CheckoutSideMenu";
 import { ShoppingCartContext } from "../../Context";
 
 import "./Navbar.css";
 
 const Navbar = () => {
-	const { count } = useContext(ShoppingCartContext);
+	const { count, isCheckoutSideOpen } = useContext(ShoppingCartContext);
 
 	return (
 		<nav className="flex justify-between items-center sticky top-0 z-10 w-full py-5 px-8 text-sm font-light bg-white">
@@ -43,6 +44,7 @@ const Navbar = () => {
 					<sup>{count}</sup>
 				</li>
 			</ul>
+			{isCheckoutSideOpen && <CheckoutSideMenu />}
 		</nav>
 	);
 };

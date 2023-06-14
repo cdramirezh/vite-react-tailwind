@@ -4,16 +4,25 @@ import { ShoppingCartContext } from "../../Context";
 
 const Card = (item) => {
 	let { title, price, category, image } = { ...item };
-	const { onAddCount, openProductDetail, setDisplayedItem, setCart, cart } =
-		useContext(ShoppingCartContext);
+	const {
+		onAddCount,
+		openProductDetail,
+		setDisplayedItem,
+		setCart,
+		cart,
+		openCheckoutSide,
+		closeProductDetail,
+	} = useContext(ShoppingCartContext);
 	const showProduct = () => {
 		setDisplayedItem(item);
 		openProductDetail();
 	};
 	const addToCart = (event) => {
 		event.stopPropagation();
+		closeProductDetail()
 		onAddCount();
-		setCart([...cart, item])
+		setCart([...cart, item]);
+		openCheckoutSide();
 	};
 
 	return (

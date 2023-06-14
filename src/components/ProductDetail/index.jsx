@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 
 const ProductDetail = () => {
-	const { isProductDetailOpen, closeProductDetail, displayedItem } =
+	const { isProductDetailOpen, closeProductDetail, displayedItem, closeCheckoutSide } =
 		useContext(ShoppingCartContext);
 	let { image, title, price, description } = { ...displayedItem };
 
@@ -19,7 +19,7 @@ const ProductDetail = () => {
 				<button>
 					<XMarkIcon
 						className="h-6 w-6 text-black-500"
-						onClick={closeProductDetail}
+						onClick={() => {closeProductDetail(); closeCheckoutSide()}}
 					/>
 				</button>
 			</div>
