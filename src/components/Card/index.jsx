@@ -40,7 +40,7 @@ const Card = (item) => {
 					<PlusIcon className="h-6 w-6 text-black" />
 				</button>
 			</figure>
-			<p className="flex justify-between">
+			<p className="flex justify-between items-center">
 				<span className="text-sm font-light truncate">{title}</span>
 				<span className="text-md font-bold">{`$${price}`}</span>
 			</p>
