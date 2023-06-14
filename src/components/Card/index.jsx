@@ -1,8 +1,9 @@
-import { PlusIcon } from "@heroicons/react/24/solid";
-import { useContext } from "react";
+import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
+import { useContext, useState } from "react";
 import { ShoppingCartContext } from "../../Context";
 
 const Card = (item) => {
+	const [isInCart, setIsInCar] = useState(false);
 	let { title, price, category, image } = { ...item };
 	const {
 		onAddCount,
@@ -19,10 +20,13 @@ const Card = (item) => {
 	};
 	const addToCart = (event) => {
 		event.stopPropagation();
-		closeProductDetail()
-		onAddCount();
-		setCart([...cart, item]);
-		openCheckoutSide();
+		if (!isInCart) {
+			closeProductDetail();
+			onAddCount();
+			setCart([...cart, item]);
+			openCheckoutSide();
+			setIsInCar(true);
+		}
 	};
 
 	return (
@@ -40,10 +44,13 @@ const Card = (item) => {
 					alt={title}
 				/>
 				<button
-					className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 p-1"
+					className={`${
+						isInCart ? "bg-black" : "bg-white"
+					} absolute top-0 right-0 flex justify-center items-center w-6 h-6 rounded-full m-2 p-1`}
 					onClick={addToCart}
 				>
-					<PlusIcon className="h-6 w-6 text-black" />
+					{!!isInCart && <CheckIcon className="h-6 w-6 text-white" />}
+					{!isInCart && <PlusIcon className="h-6 w-6 text-black" />}
 				</button>
 			</figure>
 			<p className="flex justify-between items-center">
