@@ -1,21 +1,26 @@
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { OrderCard } from "../OrderCard";
 import { ShoppingCartContext } from "../../Context";
 
 const CheckoutSideMenu = () => {
 	const { closeCheckoutSide, cart, setCart, totalPrice, orders, setOrders } =
 		useContext(ShoppingCartContext);
+	const isCartEmpty = !cart.length;
 
 	const handleCheckout = () => {
-		const newOrder = {
-			date: new Date(),
-			cart: cart,
-			totalItems: cart.length,
-			totalPrice: totalPrice,
-		};
-		setOrders([...orders, newOrder]);
-		setCart([]);
+		if (!isCartEmpty) {
+			const newOrder = {
+				date: new Date(),
+				cart: cart,
+				totalItems: cart.length,
+				totalPrice: totalPrice,
+			};
+			setOrders([...orders, newOrder]);
+			setCart([]);
+			closeCheckoutSide();
+		}
 	};
 
 	return (
@@ -32,7 +37,7 @@ const CheckoutSideMenu = () => {
 			</div>
 			<div className="flex-1 px-6 overflow-auto">
 				{cart.map((item) => (
-					<OrderCard key={item.id} item={{ ...item }} />
+					<OrderCard key={item.id} item={{ ...item }} hasCloseButton={true} />
 				))}
 			</div>
 			<div className="px-6">
@@ -40,12 +45,15 @@ const CheckoutSideMenu = () => {
 					<span className="font-light">Total:</span>
 					<span className="font-medium text-2xl">{totalPrice}</span>
 				</p>
-				<button
-					className="w-full bg-black py-3 text-white rounded-lg mb-6"
-					onClick={handleCheckout}
-				>
-					Checkout
-				</button>
+				<Link to="my-orders/last">
+					<button
+						className="w-full bg-black py-3 text-white rounded-lg mb-6"
+						onClick={handleCheckout}
+						disabled={isCartEmpty}
+					>
+						Checkout
+					</button>
+				</Link>
 			</div>
 		</aside>
 	);
