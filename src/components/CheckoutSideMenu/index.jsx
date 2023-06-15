@@ -4,7 +4,8 @@ import { OrderCard } from "../OrderCard";
 import { ShoppingCartContext } from "../../Context";
 
 const CheckoutSideMenu = () => {
-	const { closeCheckoutSide, cart } = useContext(ShoppingCartContext);
+	const { closeCheckoutSide, cart, totalPrice } =
+		useContext(ShoppingCartContext);
 
 	return (
 		// 68px is the height of the nav
@@ -17,6 +18,12 @@ const CheckoutSideMenu = () => {
 						onClick={closeCheckoutSide}
 					/>
 				</button>
+			</div>
+			<div className="px-6">
+				<p className="flex justify-between items-center">
+					<span className="font-light">Total:</span>
+					<span className="font-medium text-2xl">{totalPrice}</span>
+				</p>
 			</div>
 			<div className="px-6 overflow-auto">
 				{cart.map((item) => (

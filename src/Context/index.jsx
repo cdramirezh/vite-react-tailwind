@@ -7,6 +7,8 @@ export const ShoppingCartProvider = ({ children }) => {
 	const [displayedItem, setDisplayedItem] = useState({});
 	const [cart, setCart] = useState([]);
 	const count = cart.length;
+	const totalPrice =
+		cart.reduce((prev, current) => prev + current.price * 100, 0) / 100;
 	const [isCheckoutSideOpen, setIsCheckoutSideOpen] = useState(false);
 
 	const openProductDetail = () => setIsProductDetailOpen(true);
@@ -28,6 +30,7 @@ export const ShoppingCartProvider = ({ children }) => {
 				isCheckoutSideOpen,
 				openCheckoutSide,
 				closeCheckoutSide,
+				totalPrice,
 			}}
 		>
 			{children}
