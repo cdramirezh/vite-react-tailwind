@@ -1,12 +1,9 @@
 import { PlusIcon, CheckIcon } from "@heroicons/react/24/solid";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ShoppingCartContext } from "../../Context";
 
-const Card = (item) => {
-	const [isInCart, setIsInCar] = useState(false);
-	let { title, price, category, image } = { ...item };
+const Card = ({ item, item: { id, title, price, category, image } }) => {
 	const {
-		onAddCount,
 		openProductDetail,
 		setDisplayedItem,
 		setCart,
@@ -14,6 +11,7 @@ const Card = (item) => {
 		openCheckoutSide,
 		closeProductDetail,
 	} = useContext(ShoppingCartContext);
+	const isInCart = !!cart.find((item) => item.id === id);
 	const showProduct = () => {
 		setDisplayedItem(item);
 		openProductDetail();
@@ -22,10 +20,8 @@ const Card = (item) => {
 		event.stopPropagation();
 		if (!isInCart) {
 			closeProductDetail();
-			onAddCount();
 			setCart([...cart, item]);
 			openCheckoutSide();
-			setIsInCar(true);
 		}
 	};
 
