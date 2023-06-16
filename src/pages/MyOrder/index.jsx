@@ -1,12 +1,21 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { OrderCard } from "../../components/OrderCard";
 import { ShoppingCartContext } from "../../Context";
+import { NotFound } from "../NotFound";
 
 function MyOrder() {
 	const { orders } = useContext(ShoppingCartContext);
-	const cart = orders.at(-1)?.cart || [];
+	const { id } = useParams()
+	let cart = []
+	if (id === 'last') {
+		cart = orders.at(-1)?.cart || []
+	} else if (Number.isInteger(Number(id))) {
+		cart = orders?.[id]?.cart || []
+	} else {
+		return (<NotFound />)
+	}
 	return (
 		<>
 			<div className="relative flex items-center justify-center w-80 mb-6">

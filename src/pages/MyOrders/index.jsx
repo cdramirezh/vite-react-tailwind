@@ -7,10 +7,10 @@ function MyOrders() {
 	return (
 		<>
 			<div className="relative flex justify-center w-80">
-				<h1>My Order</h1>
+				<h1>My Orders</h1>
 			</div>
 			{orders.map((order, i) => (
-				<Link to={`my-orders/${order.id}`} key={i}>
+				<Link to={`/my-orders/${i}`} key={i}>
 					<OrderCards order={order} />
 				</Link>
 			))}
