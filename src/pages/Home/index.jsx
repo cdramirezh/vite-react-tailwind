@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { ProductDetail } from "../../components/ProductDetail";
 import { URL } from "../../API";
-import "./home.css";
 
 function Home() {
 	const [items, setItems] = useState([]);
