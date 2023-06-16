@@ -6,8 +6,8 @@ function MyOrders() {
 	const { orders } = useContext(ShoppingCartContext);
 	return (
 		<>
-			<div className="relative flex justify-center w-80">
-				<h1>My Orders</h1>
+			<div className="relative flex justify-center w-80 mb-4">
+				<h1 className="font-medium text-xl">My Orders</h1>
 			</div>
 			{orders.map((order, i) => (
 				<Link to={`/my-orders/${i}`} key={i}>
