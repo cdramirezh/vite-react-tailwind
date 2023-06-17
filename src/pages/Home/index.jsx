@@ -1,36 +1,30 @@
 import { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { NotFound } from "../NotFound";
 import { Card } from "../../components/Card";
 import { ProductDetail } from "../../components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
 
 function Home() {
-
-	const location = useLocation().pathname;
+	const { category } = useParams();
 	const { items } = useContext(ShoppingCartContext);
 
+	const categoryFiltersMap = [
+		{ route: "clothes", category: "women's clothing" },
+		{ route: "electronics", category: "electronics" },
+		{ route: "furniture", category: "jewelery" },
+		{ route: "toys", category: "men's clothing" },
+		{ route: "others", category: "electronics" },
+	];
+
 	let itemsFilteredByCat = [];
-	switch (location) {
-		case "/clothes":
-			itemsFilteredByCat = items.filter(
-				(item) => item.category === "women's clothing"
-			);
-			break;
-		case "/electronics":
-			itemsFilteredByCat = items.filter((item) => item.category === "electronics");
-			break;
-		case "/furniture":
-			itemsFilteredByCat = items.filter((item) => item.category === "jewelery");
-			break;
-		case "/toys":
-			itemsFilteredByCat = items.filter((item) => item.category === "men's clothing");
-			break;
-		case "/others":
-			itemsFilteredByCat = items.filter((item) => item.category === "men's clothing" || item.category === "electronics");
-			break;
-		default:
-			itemsFilteredByCat = items;
-			break;
+
+	if (categoryFiltersMap.some((e) => e.route === category)) {
+		itemsFilteredByCat = items.filter((item) => item.category === categoryFiltersMap.find(e => e.route === category).category);
+	} else if (category === undefined) {
+		itemsFilteredByCat = items;
+	} else {
+		return <NotFound />;
 	}
 
 	const [searchValue, setSearchValue] = useState("");
@@ -42,7 +36,7 @@ function Home() {
 					.includes(searchValue.toString().toLowerCase())
 		  )
 		: itemsFilteredByCat;
-		
+
 	return (
 		<>
 			<ProductDetail />
